@@ -1,0 +1,35 @@
+{
+  "name": "shopflow-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deependra-jhariya/ShopFlow-Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Deependra-jhariya/ShopFlow-Server/issues"
+  },
+  "homepage": "https://github.com/Deependra-jhariya/ShopFlow-Server#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "nodemon": "^3.1.11"
+  }
+}
