@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Iuser } from "./user.types";
+import { Iuser } from "./user.types.ts";
 import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema<Iuser>(
@@ -46,8 +46,16 @@ userSchema.methods.generateAccessToken = function () {
   );
 };
 
-// userSchema.methods.generateRefreshToken = function (){
-//   return 
-// }
+userSchema.methods.generateRefreshToken = function () {
+  return jwt.sign(
+    {
+      _id: this.id,
+      name: this.name,
+      email: this.email,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
+  );
+};
 
 export const User = mongoose.model("User", userSchema);
