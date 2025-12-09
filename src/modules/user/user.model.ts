@@ -1,6 +1,21 @@
 import mongoose from "mongoose";
-import { Iuser } from "./user.types.ts";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import { Document } from "mongoose";
+
+export interface Iuser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  role: "user" | "admin";
+  isActive: boolean;
+  refreshToken?: string;
+
+
+  generateAccessToken(): string;
+  generateRefreshToken(): string;
+  isPasswordCorrect(password: string): Promise<boolean>;
+}
 
 const userSchema = new mongoose.Schema<Iuser>(
   {
@@ -58,4 +73,8 @@ userSchema.methods.generateRefreshToken = function () {
   );
 };
 
-export const User = mongoose.model("User", userSchema);
+userSchema.methods.isPasswordCorret = async function (password: string) {
+  return await bcrypt.compare(password, this.password);
+};
+
+export const User = mongoose.model<Iuser>("User", userSchema);

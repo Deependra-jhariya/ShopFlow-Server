@@ -1,13 +1,22 @@
-import { User } from "./user.model";
 import { asyncHandler } from "../../utils/asyncHandler.ts";
 import { ApiResponse } from "../../utils/ApiResponse.ts";
-import { createUser } from "./user.services.ts";
+import { createUserService,loginService } from "./user.services.ts";
 
-export const handleCreateUser = asyncHandler(async (req, res) => {
+const handleCreateUser = asyncHandler(async (req:any, res:any) => {
     
-  const result = await createUser(req.body);
+  const result = await createUserService(req.body);
 
   return res
     .status(200)
-    .json(new ApiResponse(200, result, "User create successfully."));
+    .json(new ApiResponse(200, result, "User created successfully."));
 });
+
+const handleLoginUser = asyncHandler(async(req:any,res:any)=>{
+
+  const {loggedInUser,accessToken} = await loginService(req.body)
+
+  return res.status(200).json(new ApiResponse(200,{loggedInUser,accessToken},"User login successfully."))
+})
+
+
+export {handleCreateUser,handleLoginUser}

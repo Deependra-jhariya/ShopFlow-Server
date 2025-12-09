@@ -10,9 +10,10 @@ app.use(
   })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true, limit: "16kb" }));
-app.use(express.static("public"));
+
+app.use(cors());
+app.use(express.json());  // REQUIRED for req.body
+app.use(express.urlencoded({ extended: true })); // REQUIRED for form data
 app.use(cookieParser());
 
 // Routes

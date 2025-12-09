@@ -1,8 +1,9 @@
 import {Router} from "express"
-import { createUser } from "./user.services.ts";
+import { handleCreateUser, handleLoginUser } from "./user.controller.ts";
 const router = Router()
 
 
-router.route("/signup").post(createUser)
+router.route("/signup").post(handleCreateUser)
+router.route("/login").post(handleLoginUser)
 
 export default router;
